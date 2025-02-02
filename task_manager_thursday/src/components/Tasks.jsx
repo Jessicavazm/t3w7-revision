@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocalStorage } from 'react-use';
+import { useTasks } from '../contexts/TaskContext';
+
+// import hooks
+const tasks = useTasks();
+console.log(tasks)
 
 
 const Tasks = () => {

@@ -39,3 +39,15 @@ useEffect hook replaces and combines multiple lifecycle methods from class compo
 - componentDidUpdate → Runs after the component updates (when dependencies change).
 - componentWillUnmount → Runs before the component unmounts (for cleanup).
 - With useEffect, all these behaviors can be achieved inside a single hook.
+
+
+## Custom Hooks
+Custom hooks in React are reusable functions that encapsulate logic using built-in hooks like useState and useEffect. They allow you to abstract and share logic across multiple components without repeating code. A custom hook typically starts with "use" (e.g., useFetch or useAuth) and can manage state, handle API calls, or manage side effects. By using custom hooks, you can keep components clean and more maintainable while improving code reusability.
+
+- Must start with "use" (e.g., useFetch, useAuth).
+- Must be called at the top level of a function (not inside loops, conditions, or nested functions).
+- Can use other React hooks inside them (useState, useEffect, etc.).
+- Custom hooks return data, functions, or state, but they don’t return JSX like components do.
+- Just like React’s built-in hooks, custom hooks can manage state (useState), handle side effects (useEffect), or even use other hooks like useContext or useRef.
+- Great for handling fetch requests, authentication, form validation, etc., in a reusable way.
+
