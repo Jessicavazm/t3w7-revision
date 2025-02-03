@@ -1,18 +1,35 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
+// Create the context
 const TaskContext = createContext();
 
-// Props is passed here so any other component can access it
+// Provider to provide the context into the child components
 export default function TaskProvider(props){
     let [tasks, setTasks] = useState([]);
+
+    // Create an add task fn which executes the setTask 
+    // setTask accepts the list of the previous tasks and add the new task
+    const addTask = (task) => setTasks((prev) => [...prev, task]);
+
+    // Delete task function
+    const deleteTask = (id) => setTasks((prev) => prev.filter((task) => task.id != id))
+
+
+    // make sure to return individual tasks 
     return (
-        <TaskContext.Provider value={tasks}>
+        <TaskContext.Provider value={{tasks, addTask, deleteTask}}>
             {props.children}
         </TaskContext.Provider>
     )
 }
 
-// Create a custom hook to unpack the list
+// Create a custom hook to unpack the context and return it
+// This allows to only call useTasks() when we want to access the context
 export function useTasks() {
-    console.log('Passing data around.')
+    console.log("Passing data around.");
+    let context = useContext(TaskContext);
+    if (!context) {
+        console.log("No Task found.")
+    }
+    return context;
 }
