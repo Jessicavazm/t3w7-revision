@@ -1,19 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useLocalStorage } from 'react-use';
+// import { useLocalStorage } from 'react-use';
 import { useTasks } from '../contexts/TaskContext';
 
 // const tasks = useTasks();
 // console.log(tasks)
 
 const Tasks = () => {
-    const [tasks, setTasks] = useLocalStorage('tasks', []);
-
-    // fn that mimics the deleted fn by creating a new array
-    const deleteTask = (id) => {
-        const updatedTasks = tasks.filter((task) => task.id != id);
-        setTasks(updatedTasks);
-    }
+    const {tasks, deleteTask} = useTasks();
 
     return (
         <div>
