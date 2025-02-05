@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 const TaskContext = createContext();
 
 // Provider to provide the context into the child components
-export default function TaskProvider(props){
+export default function TaskProvider(props) {
     let [tasks, setTasks] = useState([]);
 
     // Create an add task fn which executes the setTask 
@@ -14,10 +14,21 @@ export default function TaskProvider(props){
     // Delete task function
     const deleteTask = (id) => setTasks((prev) => prev.filter((task) => task.id != id))
 
+    // Edit a task
+    const editTask = (updatedTask) => {
+        setTasks((prev) =>
+            prev.map(
+                (task) => (
+                    task.id === updatedTask.id ?
+                        { ...task, ...updatedTask } :
+                        task
+                )
+            ))
+    }
 
-    // make sure to return individual tasks 
+    // make sure to return individual task 
     return (
-        <TaskContext.Provider value={{tasks, addTask, deleteTask}}>
+        <TaskContext.Provider value={{ tasks, addTask, deleteTask, editTask }}>
             {props.children}
         </TaskContext.Provider>
     )
@@ -26,7 +37,6 @@ export default function TaskProvider(props){
 // Create a custom hook to unpack the context and return it
 // This allows to only call useTasks() when we want to access the context
 export function useTasks() {
-    console.log("Passing data around.");
     let context = useContext(TaskContext);
     if (!context) {
         console.log("No Task found.")

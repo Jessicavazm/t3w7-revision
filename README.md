@@ -51,3 +51,11 @@ Custom hooks in React are reusable functions that encapsulate logic using built-
 - Just like React’s built-in hooks, custom hooks can manage state (useState), handle side effects (useEffect), or even use other hooks like useContext or useRef.
 - Great for handling fetch requests, authentication, form validation, etc., in a reusable way.
 
+
+### UseContext + Custom Hooks
+Common pattern in React to encapsulate and simplify access to context values. Why use useContext in a custom hook?
+
+- Encapsulation: Keeps context logic separate from components.
+- Reusability: Allows multiple components to easily access the context.
+- Cleaner code: Reduces prop drilling and makes components more readable.
+- Benefits: Error handling, validation.
